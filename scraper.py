@@ -33,9 +33,9 @@ SITES = {
         "url": "https://www.merrjep.al/njoftime/imobiliare-vendbanime/apartamente/vlore/q-me-qera-afatgjate",
         "label": "MerrJep.al",
     },
-    "njoftime_al": {
-        "url": "https://www.njoftime.al/apartamente-me-qera-afatgjate-vlore/l-al-c-4.html",
-        "label": "Njoftime.al",
+        "njoftime_al": {
+        "url": "https://www.duanjoftime.com/al/shtepi-me-qera-vlore-afatgjate/c-4",
+        "label": "DuaNjoftime.com",
     },
 }
 

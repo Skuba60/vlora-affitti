@@ -33,11 +33,7 @@ SITES = {
         "url": "https://www.merrjep.al/njoftime/imobiliare-vendbanime/apartamente/vlore/q-me-qera-afatgjate",
         "label": "MerrJep.al",
     },
-        "njoftime_al": {
-        "url": "https://www.duanjoftime.com/al/shtepi-me-qera-vlore-afatgjate/c-4",
-        "label": "DuaNjoftime.com",
-    },
-}
+        }
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "

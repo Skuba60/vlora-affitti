@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor affitti Vlore</title>
+<style>
+  :root {
+    --sea-dark: #0c447c;
+    --sea: #378ADD;
+    --sea-light: #E6F1FB;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5f5e5a;
+    --text-muted: #888780;
+    --border: #e2e2df;
+    --surface-1: #f6f5f1;
+    --surface-2: #ffffff;
+    --bg-page: #fbfaf7;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    padding: 0;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--sea-dark);
+  }
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 4px 0 0;
+  }
+  button {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  button:hover { background: var(--surface-1); }
+  #status-box {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+  #stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin: 0 0 4px; }
+  .stat-value { font-size: 22px; font-weight: 600; margin: 0; color: var(--sea-dark); }
+  #filter-row { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .filter-btn.active { border-color: var(--sea); color: var(--sea-dark); background: var(--sea-light); }
+  #listings {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .listing-row {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .listing-row:last-child { border-bottom: none; }
+  .listing-row:hover { background: var(--surface-1); }
+  .listing-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .listing-site { font-size: 12px; color: var(--text-muted); margin: 0; }
+  #error-box {
+    display: none;
+    padding: 1rem;
+    background: #FAECE7;
+    border-radius: var(--radius);
+    color: #712B13;
+    font-size: 14px;
+  }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2rem;
+  }
+  footer a { color: var(--sea); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>🏠 Monitor affitti Vlore</h1>
+      <p class="subtitle">Annunci di affitto a lungo periodo, aggiornati ogni giorno</p>
+    </div>
+    <button id="refresh-btn">↻ Aggiorna</button>
+  </header>
+
+  <div id="status-box">Carico i dati...</div>
+  <div id="stats-grid"></div>
+  <div id="filter-row"></div>
+  <div id="listings"></div>
+  <div id="error-box"></div>
+
+  <footer>
+    Dati raccolti automaticamente ogni giorno da
+    <a href="https://github.com/Skuba60/vlora-affitti" target="_blank">github.com/Skuba60/vlora-affitti</a>
+  </footer>
+
+</div>
+
+<script>
+const RAW_URL = "./seen.json?t=" + Date.now();
+let activeSite = "all";
+
+function timeAgo(isoString) {
+  if (!isoString) return "sconosciuto";
+  const diffMs = Date.now() - new Date(isoString).getTime();
+  const mins = Math.round(diffMs / 60000);
+  if (mins < 60) return mins + " min fa";
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return hours + " ore fa";
+  const days = Math.round(hours / 24);
+  return days + " giorni fa";
+}
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderStats(data) {
+  const meta = data._meta || {};
+  const labels = meta.site_labels || {};
+  const siteKeys = Object.keys(data).filter(k => k !== "_meta");
+  let total = 0;
+  siteKeys.forEach(k => total += Object.keys(data[k]).length);
+
+  document.getElementById("stats-grid").innerHTML = `
+    <div class="stat-card"><p class="stat-label">Annunci totali</p><p class="stat-value">${total}</p></div>
+    <div class="stat-card"><p class="stat-label">Siti monitorati</p><p class="stat-value">${siteKeys.length}</p></div>
+    <div class="stat-card"><p class="stat-label">Ultima scansione</p><p class="stat-value" style="font-size:16px;">${timeAgo(meta.last_run)}</p></div>
+  `;
+
+  let filterHtml = `<button class="filter-btn active" data-site="all">Tutti (${total})</button>`;
+  siteKeys.forEach(k => {
+    filterHtml += `<button class="filter-btn" data-site="${k}">${labels[k] || k} (${Object.keys(data[k]).length})</button>`;
+  });
+  document.getElementById("filter-row").innerHTML = filterHtml;
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeSite = btn.dataset.site;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderListings(data);
+    });
+  });
+}
+
+function renderListings(data) {
+  const meta = data._meta || {};
+  const labels = meta.site_labels || {};
+  const siteKeys = Object.keys(data).filter(k => k !== "_meta");
+  const container = document.getElementById("listings");
+
+  let rows = [];
+  siteKeys.forEach(siteKey => {
+    if (activeSite !== "all" && activeSite !== siteKey) return;
+    const entries = data[siteKey];
+    Object.keys(entries).forEach(url => {
+      rows.push({ site: labels[siteKey] || siteKey, title: entries[url] || "(senza titolo, apri il link)", url });
+    });
+  });
+
+  if (rows.length === 0) {
+    container.innerHTML = `<p style="padding:2rem; text-align:center; color:var(--text-muted); font-size:14px;">Nessun annuncio da mostrare.</p>`;
+    return;
+  }
+
+  container.innerHTML = rows.map(r => `
+    <a class="listing-row" href="${r.url}" target="_blank" rel="noopener">
+      <p class="listing-title">${escapeHtml(r.title)}</p>
+      <p class="listing-site">${escapeHtml(r.site)}</p>
+    </a>
+  `).join("");
+}
+
+async function loadData() {
+  const statusBox = document.getElementById("status-box");
+  const errorBox = document.getElementById("error-box");
+  statusBox.textContent = "Carico i dati...";
+  errorBox.style.display = "none";
+
+  try {
+    const res = await fetch(RAW_URL);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    statusBox.textContent = "Dati aggiornati direttamente dal repository.";
+    renderStats(data);
+    renderListings(data);
+  } catch (e) {
+    statusBox.textContent = "";
+    errorBox.style.display = "block";
+    errorBox.textContent = "Non riesco a leggere i dati (" + e.message + "). Riprova tra qualche minuto.";
+  }
+}
+
+document.getElementById("refresh-btn").addEventListener("click", loadData);
+loadData();
+</script>
+</body>
+</html>

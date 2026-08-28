@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Scarica il codice del progetto
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Prepara Python
         uses: actions/setup-python@v5

@@ -34,7 +34,7 @@ SITES = {
         "label": "MerrJep.al",
     },
    "duashpi": {
-        "url": "https://duashpi.al/shtepi-me-qera-ne-vlore",
+        "url": "https://duashpi.al/it/casa-in-affitto-a-vlore",
         "label": "DuaShpi.al",
     },
    

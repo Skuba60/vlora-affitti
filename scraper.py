@@ -4,7 +4,7 @@ Monitor annunci affitti a lungo periodo - Vlore (Albania)
 
 Cosa fa questo script, in parole semplici:
 1. Va a visitare le pagine di ricerca (gia' filtrate per Vlore + affitto
-   lungo periodo) di due siti: MerrJep.al e Njoftime.al
+   lungo periodo) dei siti configurati
 2. Legge la lista di annunci trovati
 3. Confronta questa lista con quella salvata l'ultima volta (file seen.json)
 4. Se trova annunci NUOVI (che non c'erano prima), li manda su Telegram
@@ -33,23 +33,18 @@ SITES = {
         "url": "https://www.merrjep.al/njoftime/imobiliare-vendbanime/apartamente/vlore/q-me-qera-afatgjate",
         "label": "MerrJep.al",
     },
-   "duashpi": {
+    "duashpi": {
         "url": "https://duashpi.al/it/casa-in-affitto-a-vlore",
         "label": "DuaShpi.al",
     },
-   
-        }
+}
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     ),
     "Accept-Language": "sq,it;q=0.9,en;q=0.8",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    
-    "Referer": "https://www.google.com/",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
 }
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -61,13 +56,19 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 # ---------------------------------------------------------------------------
 
 def load_seen():
+    """Legge il file con gli annunci gia' visti (se esiste)."""
     if SEEN_FILE.exists():
         with open(SEEN_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {site_key: [] for site_key in SITES}
+            data = json.load(f)
+        for site_key, value in data.items():
+            if isinstance(value, list):
+                data[site_key] = {listing_id: "" for listing_id in value}
+        return data
+    return {site_key: {} for site_key in SITES}
 
 
 def save_seen(seen):
+    """Salva il file con gli annunci visti, per la prossima esecuzione."""
     with open(SEEN_FILE, "w", encoding="utf-8") as f:
         json.dump(seen, f, ensure_ascii=False, indent=2)
 
@@ -142,13 +143,14 @@ def send_telegram_message(text):
 
 def main():
     seen = load_seen()
-    is_first_run = all(len(v) == 0 for v in seen.values())
+    site_keys = list(SITES.keys())
+    is_first_run = all(len(seen.get(k, {})) == 0 for k in site_keys)
 
     total_new = 0
 
     for site_key, site_info in SITES.items():
         current_listings = fetch_site(site_key, site_info)
-        already_seen_ids = set(seen.get(site_key, []))
+        already_seen_ids = set(seen.get(site_key, {}).keys())
 
         new_ids = [lid for lid in current_listings if lid not in already_seen_ids]
 
@@ -167,7 +169,12 @@ def main():
                 total_new += 1
                 time.sleep(1)
 
-        seen[site_key] = list(current_listings.keys())
+        seen[site_key] = current_listings
+
+    seen["_meta"] = {
+        "last_run": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "site_labels": {k: v["label"] for k, v in SITES.items()},
+    }
 
     if is_first_run:
         print("Prima esecuzione: ho salvato gli annunci attuali come 'gia' visti', "

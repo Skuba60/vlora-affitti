@@ -37,9 +37,9 @@ SITES = {
         "url": "https://duashpi.al/it/casa-in-affitto-a-vlore",
         "label": "DuaShpi.al",
     },
-    "homezone": {
-    "url": "https://homezone.al/properties/rent/vlore",
-    "label": "Homezone.al",
+        "homezone": {
+        "url": "https://homezone.al/it/properties/rent/vlore",
+        "label": "Homezone.al",
     },
 }
 

@@ -51,7 +51,6 @@
     "https://www.facebook.com/pages/MerrJep.al/229379603803908": "(annuncio senza titolo leggibile, apri il link)",
     "https://api.whatsapp.com/send": "(annuncio senza titolo leggibile, apri il link)"
   },
-  "njoftime_al": {},
   "duashpi": {
     "https://duashpi.al/it/immobile/6a9357f0d1e427de55032c45/appartamento-in-affitto-a-vlora-albania.html": "600 €/ mensileAppartamento in affitto a Vlora AlbaniaRruga Murat Tërbaçi, VloreVlora\n🟠Appartamenti 1+1 in affitto (disponibili dal 26.09)\nArredati, create condizioni per una vita confortevole.\n🟠Ogni stanza ha aria condizionata. Un letto può essere rimosso se desiderato. C'è accesso al tetto dalla cucina. Puoi organizzare un'area relax\nAffitto a lungo termine \n🟠Prezzo: 600€/mese.\nPosizione: Lungomare \nno animali domestici\n1 mese di anticipo 2 mesi di garanzia \nPer informazioni più dettagliate, scrivi su WhatsApp .1190 m²12 ore fa",
     "https://duashpi.al/it/immobile/6a933e6643764f8f6e0120e6/appartamento-con-due-camere-da-letto-in-affitto-a-lungo-termine-a-vlora-albania.html": "600 €/ mensileAppartamento con due camere da letto in affitto a lungo termine a Vlora, AlbaniaRr. Sazani, VloreAppartamento in Affitto a Lungomare Vlora\n   “Sazani ” ,Via\nHotel Kral\nLibero da Settembre\nL'appartamento ha:\n• Soggiorno\n• Zona cucina\n・2 camere da letto\n• 1 bagno\n• Balcone\n\nAltre caratteristiche:\nL'appartamento è ben investito con progetto architettonico\n• Aria condizionata\n• Lavatrice\n• Tutte le forniture da cucina\n• Nuovo edificio con ascensore\n• 4° piano\n• Buona qualità\n• L'appartamento ha luce naturale tutto il giorno,\n Animali ammessi\nAffitto mensile 600€\n  1 mese di anticipo 2 mesi di deposito (garanzia)21100 m²14 ore fa",
@@ -72,14 +71,6 @@
     "https://duashpi.al/it/immobile/6a786a29155d8112350b56a5/appartamento-con-vista-mare-in-affitto-a-lungo-termine-garage-lungomare-vlore.html": "1,100 €/ mensileAppartamento con vista mare in affitto a lungo termine Garage  lungomare VloreRruga Murat Tërbaçi, VloreAbbiamo un appartamento con vista mare in affitto a lungo termine +Garage \n• Lungomare Titanic \nL'appartamento dispone di: \n• Soggiorno \n• Ambiente cucina \n•1 camera da letto \n• 1 bagno \n•1 grande balcone con vista mare \nAltre caratteristiche: \n• Arredato \n• Lavastoviglie \n• Aria condizionata \n• Nuovo edificio \n• 4° piano \n   Garage incluso \nAffitto mensile 1100€ \n1 mese di anticipo e 2 garanzie. \nPer una visita alla proprietà, contattaci!11100 m²3 giorni fa",
     "https://duashpi.al/it/immobile/6a8f391261a0249a5f00f3ca/casa-11-in-affitto.html": "350 €/ mensileCASA 1+1 IN AFFITTO!!!Rruga Mis Durhan, Vlore# Descrizione Appartamento 1+1\n\nAffittasi **appartamento 1+1 al quinto piano**, situato in una zona tranquilla e comoda. L'appartamento è **completamente arredato e arredato con gusto**, offrendo uno spazio abitativo confortevole e funzionale.\n\nDispone di **balcone** e **aria condizionata** ed è una casa **calda, accogliente e luminosa**, ideale per una persona o una coppia.\n\nL'appartamento è **pronto per essere abitato** e offre tutte le condizioni necessarie per una vita confortevole.1185 m²3 giorni fa",
     "https://apps.apple.com/al/app/duashpi-al/id6741591085": "(annuncio senza titolo leggibile, apri il link)"
-  },
-  "_meta": {
-    "last_run": "2026-08-30T10:36:45Z",
-    "site_labels": {
-      "merrjep": "MerrJep.al",
-      "duashpi": "DuaShpi.al",
-      "homezone": "Homezone.al"
-    }
   },
   "homezone": {
     "https://homezone.al/property/rent/vlore/rruga-aleksander-moisiu-263128": "PremiumCertifikatë13€600.00/muaj1Dhoma1Banjo6430/08/2026Apartament - Për Qira - Rruga Aleksandër Moisiu, VlorëApartament me qera » Uji i Ftohtë, Rruga Aleksandër Moisiu, Vlorë",
@@ -102,5 +93,13 @@
     "https://homezone.al/property/rent/vlore/lungomare-268779": "Certifikatë19€480.00/muaj1Dhoma1Banjo6527/08/2026Apartament me qeraApartament me qera » Vlorë, Lungomare",
     "https://homezone.al/property/rent/vlore/vlore-268202": "PremiumCertifikatë6LEK 90000/muaj2Dhoma1Banjo12126/08/2026JEPET APARTAMENT 2+1 ME QIRA NE VLORE 90.000 LEKEApartament me qera » Vlorë",
     "https://homezone.al/property/rent/vlore/vlore-267709": "Certifikatë7LEK 27000/muaj2Dhoma1Banjo25/08/2026Apartament me qera 2+1Apartament me qera » Vlorë"
+  },
+  "_meta": {
+    "last_run": "2026-08-30T10:44:48Z",
+    "site_labels": {
+      "merrjep": "MerrJep.al",
+      "duashpi": "DuaShpi.al",
+      "homezone": "Homezone.al"
+    }
   }
 }

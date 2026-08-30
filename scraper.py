@@ -150,6 +150,10 @@ def main():
     site_keys = list(SITES.keys())
     is_first_run = all(len(seen.get(k, {})) == 0 for k in site_keys)
 
+    # Puliamo eventuali siti rimossi in passato dalla configurazione,
+    # cosi' non restano residui vuoti nel file salvato
+    seen = {k: v for k, v in seen.items() if k in site_keys}
+
     total_new = 0
 
     for site_key, site_info in SITES.items():

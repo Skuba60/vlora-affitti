@@ -41,6 +41,10 @@ SITES = {
         "url": "https://www.njoftime.al/apartamente-me-qera-afatgjate-vlore/l-al-c-4.html",
         "label": "Njoftime.al",
     },
+    "duashpi": {
+        "url": "https://duashpi.al/it/casa-in-affitto-a-vlore",
+        "label": "DuaShpi.al",
+    },
 }
 
 HEADERS = {

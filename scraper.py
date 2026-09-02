@@ -68,7 +68,7 @@ HEADERS = {
     "Sec-Fetch-User": "?1",
 }
 
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 
 # TELEGRAM_CHAT_ID puo' contenere UNO o PIU' ID, separati da virgola.
 # Esempio con un solo destinatario:  TELEGRAM_CHAT_ID=123456789

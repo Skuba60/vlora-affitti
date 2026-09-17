@@ -2,7 +2,6 @@
   "merrjep": [
     "https://www.merrjep.al/njoftim/apt-2+1-me-qera-ne-lungomare-pamje-nga-deti/19733417",
     "https://www.merrjep.al/njoftim/jepet-apartament-me-qera-vlore-skele/19826917",
-    "https://www.merrjep.al/njoftim/jepet-me-qera-aftagjate-2+1/19808891",
     "https://www.merrjep.al/njoftim/apartament-ne-radhime-1+1/19613994",
     "https://www.merrjep.al/njoftim/apartament-ne-radhime/19578254",
     "https://www.merrjep.al/njoftim/apartament-me-qera-afatgjat-prane-marina-bay-+garazde/19775946",
@@ -10,6 +9,7 @@
     "https://www.merrjep.al/njoftim/me-qera-apartment-luksoz-2+1-ne-lungomare-vija-e-pare/19735491",
     "https://www.merrjep.al/njoftim/2+1-me-qera-afatgjate/19722535",
     "https://www.merrjep.al/njoftim/apt-2+1-lungomare-jepet-me-qera/19733613",
+    "https://www.merrjep.al/njoftim/apartament-me-qera-afargjat/19731649",
     "https://www.merrjep.al/njoftim/1+1-me-qera-afatgjate/19722451",
     "https://www.merrjep.al/njoftim/apartament-me-qera-ne-orikum/19720670",
     "https://www.merrjep.al/njoftim/apartament-1+1-transballkanike/19703662",
@@ -52,6 +52,11 @@
     "https://api.whatsapp.com/send"
   ],
   "duashpi": [
+    "https://duashpi.al/it/immobile/6aaa98273987faf37d0a5872/-papafingo-in-affitto-vlor.html",
+    "https://duashpi.al/it/immobile/6aaa91c3ba90a1966f0b3ca3/affittasi-appartamento-11-a-vlora-diamond-hill-67-m-2-piano-50000-lekemese.html",
+    "https://duashpi.al/it/immobile/6aaa89e499791a661e0513b1/appartamento-in-affitto.html",
+    "https://duashpi.al/it/immobile/6aaa689db7fba5531302444b/appartamento-11-in-affitto-a-lungo-termine---lungomare-residenza-odeon-vlore.html",
+    "https://duashpi.al/it/immobile/6aaa558f696b198969091497/appartamento-21-in-affitto-ad-aleksandria-vlor.html",
     "https://duashpi.al/it/immobile/6aa9b52db5acc54fb20077df/appartamento-in-affitto.html",
     "https://duashpi.al/it/immobile/6a9a11902f879ba2eb0506a3/appartamento-11-sul-lungomare-vlore.html",
     "https://duashpi.al/it/immobile/6a9e951eb2472e9e560470ee/appartamento-21-in-affitto-a-lungomare-vlora.html",
@@ -66,9 +71,6 @@
     "https://duashpi.al/it/immobile/6aa52624b10cabc3b60685c8/appartamento-11-in-affitto-a-lungo-termine-lungomare-vlora.html",
     "https://duashpi.al/it/immobile/6aa5255108e75fcf3c019ef2/appartamento-11-in-affitto-conadi-vlor.html",
     "https://duashpi.al/it/immobile/6aa522c1af594b075e000394/appartamento-21-in-affitto-a-lungo-termine-lungomare-vlor.html",
-    "https://duashpi.al/it/immobile/6aa400106aec07836304dd53/appartamento-21-in-affitto-annuale-con-vista-mare.html",
-    "https://duashpi.al/it/immobile/6aa3e710013b5d13960f6ad5/appartamento-11-in-affitto-transbalkanico-vlor.html",
-    "https://duashpi.al/it/immobile/6aa2b2a31322ad730701555b/-appartamento-21-in-affitto-annuale-vlor.html",
     "https://apps.apple.com/al/app/duashpi-al/id6741591085"
   ],
   "homezone": {

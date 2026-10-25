@@ -213,7 +213,7 @@ def fetch_site(site_key, site_info):
         resp.raise_for_status()
     except Exception as e:
         print(f"[ATTENZIONE] Non sono riuscito a leggere {site_info['label']}: {e}")
-        return {}
+        return None  # None = errore di lettura (diverso da "0 annunci trovati")
 
     return extract_listings(resp.text, site_info["url"], site_info)
 
@@ -254,6 +254,20 @@ def main():
 
     for site_key, site_info in SITES.items():
         current_listings = fetch_site(site_key, site_info)
+
+        # Se il sito non risponde, teniamo la memoria di prima: cosi' al
+        # prossimo giro non ci arriva una raffica di falsi "nuovi annunci"
+        if current_listings is None:
+            print(f"{site_info['label']}: errore di lettura, mantengo i dati precedenti.")
+            continue
+
+        # Se prima c'erano annunci e ora ne troviamo 0, e' quasi certamente
+        # un problema di lettura (sito cambiato/bloccato), non 0 annunci veri
+        if not current_listings and seen.get(site_key):
+            print(f"{site_info['label']}: 0 annunci trovati ma prima ce n'erano, "
+                  "mantengo i dati precedenti.")
+            continue
+
         already_seen_ids = set(seen.get(site_key, {}).keys())
 
         new_ids = [lid for lid in current_listings if lid not in already_seen_ids]

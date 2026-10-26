@@ -57,8 +57,8 @@ HEADERS = {
     "Accept-Language": "sq,it;q=0.9,en;q=0.8",
 }
 
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+TELEGRAM_BOT_TOKEN = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip()
+TELEGRAM_CHAT_ID = (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
 
 
 # ---------------------------------------------------------------------------
@@ -215,7 +215,11 @@ def main():
         print(f"{site_info['label']}: trovati {len(current_listings)} annunci, "
               f"di cui {len(new_ids)} nuovi.")
 
-        if not is_first_run:
+        if not already_seen_ids:
+            print(f"{site_info['label']}: nessuna memoria precedente, salvo gli annunci "
+                  "attuali senza inviare notifiche.")
+
+        if not is_first_run and already_seen_ids:
             for listing_id in new_ids:
                 title = current_listings[listing_id]
                 message = (
